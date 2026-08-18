@@ -40,7 +40,7 @@ public:
 
 int main()
 {
-    Product p;
+    Product p.p1;
 
     p.getdata();
     p.putdata();
