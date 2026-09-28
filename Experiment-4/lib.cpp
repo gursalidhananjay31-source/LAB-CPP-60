@@ -1,70 +1,79 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 using namespace std;
-class LibraryBook{
-    private:    
-     string title; //title to print on output
-     string author; // author to print on output 
-      int bookid;  //integer to identify unique id  
-     bool isIssued; // to check true false conditions... true when someone has it??? mayhaps
-     string issuedTo; //if someone has it isIssued will be true. 
-   
-    public:
-  //this is parameterized consructor. runs on obejct creation so new books will have new variable values stored sepratly. 
-      LibraryBook(string t, string a , int id) {     
+
+class LibraryBook {
+private:
+    string title;
+    string author;
+    int bookid;
+    bool isIssued;
+    string issuedTo;
+
+public:
+    // Constructor
+    LibraryBook(string t, string a, int id) {
         title = t;
         author = a;
         bookid = id;
-        isIssued = false;  // default value is set to false. can be changed later with assignment functions.
-        issuedTo = "" ;  
+        isIssued = false;
+    }
 
-   } 
-   //first method check if book is issued and output if issued-->> to whom issued to 
-   void issueBook(string studentName) {
-        if (!isIssued) {
+    // Issue book
+    void issueBook(string name) {
+        if (isIssued == false) {
             isIssued = true;
-            issuedTo = studentName;
-            cout << "Book issued to: " << studentName << endl;
-        } else {
-            cout << "\nBook already issued to " << issuedTo << "!" << endl;
+            issuedTo = name;
+            cout << "Book issued to " << name << endl;
+        }
+        else {
+            cout << "Book is already issued!" << endl;
         }
     }
-    // second method that also checks if book is issued and on return it sets boolean value to false so it can be issued again
+
+    // Return book
     void returnBook() {
-        if (isIssued) {
-            cout << "\nBook returned by: " << issuedTo << endl;
+        if (isIssued == true) {
             isIssued = false;
-            issuedTo = "";
-        } else {
-            cout << "\nBook was not issued!" << endl;
+            cout << "Book returned." << endl;
+        }
+        else {
+            cout << "Book is not issued!" << endl;
         }
     }
-    // this methode just displays the values of datamembers of the class for diff obj. like titlw , id, author, and status.
+
+    // Display book details
     void display() {
-        cout << "\n[Library Book]" << endl;
-        cout << "Book ID: " << bookid << endl;
+        cout << "\nBook ID: " << bookid << endl;
         cout << "Title: " << title << endl;
         cout << "Author: " << author << endl;
-        cout << "Status: " << (isIssued ? ("Issued to " + issuedTo) : "Available\n") << endl;
+
+        if (isIssued)
+            cout << "Status: Issued to " << issuedTo << endl;
+        else
+            cout << "Status: Available" << endl;
     }
 };
 
 int main() {
-    LibraryBook book1("Bleach Thousand Year Blood War", "Tite Kubo", 101);
+
+    LibraryBook book1("", "Tite Kubo", 101);
     LibraryBook book2("Attack on Titan", "Hajime Isayama", 102);
 
-    book1.display();   //both start Available
+    book1.display();
     book2.display();
 
-    book1.issueBook("Shivam");
-    book2.issueBook("Aditya");
-    book1.display();   //both show Issued
+    book1.issueBook("Dhananjay");
+    book2.issueBook("Raj");
+
+    book1.display();
     book2.display();
 
     book1.returnBook();
     book2.returnBook();
-    book1.display();   //both show Available again —  works for both obj
-    book2.display();   
+
+    book1.display();
+    book2.display();
 
     return 0;
 }

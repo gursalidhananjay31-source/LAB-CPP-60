@@ -1,59 +1,62 @@
 #include <iostream>
 using namespace std;
+
 class Box {
 private:
-    double length;
-    double breadth;
-    double height;
+    double length, breadth, height;
+
 public:
-    //default constructor
+    // Default constructor
     Box() {
-        length = 1.0;
-        breadth = 1.0;
-        height = 1.0;
-        cout << "\ndefault constructor called" << endl;
+        length = breadth = height = 1;
+        cout << "Default constructor called\n";
     }
-    //parameterized constructor
-    Box(double l,double b, double h) {
+
+    // Parameterized constructor
+    Box(double l, double b, double h) {
         length = l;
         breadth = b;
         height = h;
-        cout << "\nParameterized constructor called" << endl;
+        cout << "Parameterized constructor called\n";
     }
-    //copy constructor ---> reference to an object of the same class || reads the member variables of the object passed in
-    Box(const Box &b) {   // <&> for refrence ||const because copy constructor shouldnt modify the object its copying from ||// b IS box2 — just under a different name
+
+    // Copy constructor
+    Box(const Box &b) {
         length = b.length;
         breadth = b.breadth;
         height = b.height;
-        cout << "\nCopy constructor called" << endl;
+        cout << "Copy constructor called\n";
     }
-    //calculate volume
-    double getvolume() {
+
+    // Calculate volume
+    double volume() {
         return length * breadth * height;
     }
-    //display object information
+
+    // Display details
     void display() {
-        cout << "Length: " << length
-             << ", Breadth: " << breadth
-             << ", Height: " << height
-             << ", Volume: " << getvolume() << endl;
+        cout << "Length: " << length << endl;
+        cout << "Breadth: " << breadth << endl;
+        cout << "Height: " << height << endl;
+        cout << "Volume: " << volume() << endl;
     }
-    //destructor
-    //it will release memory backwards of how program ran. 
-    // like if copy constructor was last call it will release copy constr.. then parametrized.. then default. same for objects
-    ~Box() {  //program ends 
-        cout << "Destructor called for Box (Volume was: " << getvolume() << ")" << endl;
+
+    // Destructor
+    ~Box() {
+        cout << "Destructor called\n";
     }
 };
+
 int main() {
-    //default constructor
-    Box box1;
+
+    Box box1;                  // Default constructor
     box1.display();
-    //parameterized constructor 
-    Box box2(2.0, 3.0, 4.0);
+
+    Box box2(2, 3, 4);         // Parameterized constructor
     box2.display();
-    //copy constructor 
-    Box box3(box2); 
+
+    Box box3(box2);            // Copy constructor
     box3.display();
+
     return 0;
 }

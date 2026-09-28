@@ -9,7 +9,7 @@ class Complex{
      Complex(int r=0,int i=0):real(r),imag(i){}
      
      Complex add(Complex x1,Complex x2){
-        complex x3;
+        Complex x3;
         x3.real=x1.real+x2.real;
         x3.imag=x1.imag+x2.imag;
         return x3;

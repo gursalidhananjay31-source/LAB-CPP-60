@@ -1,60 +1,59 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 using namespace std;
 
-class Patient{
-    private:
-     string pname; 
-     int pid;   
-     int age;   
-     string disease; 
-     double feePerVisit; //fixed consultation fee, doesnt change per patient type here   idk if i shouldve used const keyword hmmmmmmmmmm
-     double totalBill; //this is calculated later, starts at 0 since no visits yet
+class Patient {
+private:
+    string name;
+    int id;
+    int age;
+    string disease;
+    double fee;
+    double totalBill;
 
-    public:
-    //parameterized constructor. every patient obj gets their own separate values when created
-    Patient(string n, int id, int a, string dis, double fee) {
-        pname = n;
-        pid = id;
+public:
+    // Parameterized constructor
+    Patient(string n, int i, int a, string d, double f) {
+        name = n;
+        id = i;
         age = a;
-        disease = dis;
-        feePerVisit = fee;
-        totalBill = 0.0;   //initial charge 0, later changes value when passing via parameters
+        disease = d;
+        fee = f;
+        totalBill = 0;
     }
 
-    //this method is useless but question requires it
+    // Register patient
     void registerPatient() {
-        cout << "\nPatient " << pname << " registered successfully.\n" << endl;
+        cout << name << " registered successfully." << endl;
     }
 
-    //multiply fees with visits 
-    void calculateCharges(int visits) {
-        totalBill = feePerVisit * visits;
-        cout << "Total charges for " << visits << " visit(s): Rs" << totalBill << endl;
+    // Calculate bill
+    void calculateBill(int visits) {
+        totalBill = fee * visits;
+        cout << "Total Bill = Rs. " << totalBill << endl;
     }
 
-    // displayys all data members, like account statement but for patient
+    // Display patient details
     void display() {
-        cout << "\n[Patient Record]" << endl; /// why this line is not printing on first call ??? // but prints on second obj's call???
-
-        cout << "Patient ID: " << pid << endl;
-        cout << "Name: " << pname << endl;
-        cout << "Age: " << age << endl;
-        cout << "Disease: " << disease << endl;
-        cout << "Consultation Fee: Rs" << feePerVisit << endl;
-        cout << "Total Bill: Rs" << totalBill << endl;
+        cout << "\n--- Patient Record ---" << endl;
+        cout << "ID       : " << id << endl;
+        cout << "Name     : " << name << endl;
+        cout << "Age      : " << age << endl;
+        cout << "Disease  : " << disease << endl;
+        cout << "Fee      : Rs. " << fee << endl;
+        cout << "Total Bill: Rs. " << totalBill << endl;
     }
 };
 
 int main() {
-    Patient p1("Aditya", 501, 34, "Viral Fever", 300.0);
-    Patient p2("shivam", 502, 45, "Back Pain", 450.0);
+    Patient p1("Aditya", 501, 34, "Viral Fever", 300);
+    Patient p2("Akshay", 502, 45, "Back Pain", 450);
 
     p1.registerPatient();
     p2.registerPatient();
 
-    p1.calculateCharges(3);   //3 visits for fever
-    p2.calculateCharges(1);   //1 visit only
+    p1.calculateBill(3);
+    p2.calculateBill(1);
 
     p1.display();
     p2.display();
